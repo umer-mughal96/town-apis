@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
 
-const installmentSchema = mongoose.Schema(
+const ndcSchema = mongoose.Schema(
     {
         land: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'Land',
         },
-        applicant: {
+        applicantName: {
+            type: String
+        },
+        phbNo: {
+            type: String
+        },
+        membershipNo: {
             type: String
         },
         sonOf: {
-            type: String
-        },
-        landNo: {
             type: String
         },
         block: {
@@ -25,18 +28,23 @@ const installmentSchema = mongoose.Schema(
         area: {
             type: String
         },
-        propertyDealer: {
-            type: String
+        appliedBy: {
+            type: Object
         },
         phoneNo: {
             type: String
         },
-        date: {
-            type: String
+        applyDate: {
+            type: Date,
+            default: Date.now
+        },
+        fileCheckList: {
+            type: Object
         },
         status: {
             type: String,
-            enum: ["pending", "reject", "success"]
+            enum: ["pending", "reject", "success"],
+            default: "pending"
         },
         remarks: {
             type: String
@@ -49,11 +57,11 @@ const installmentSchema = mongoose.Schema(
 
 
 // add plugin that converts mongoose to json
-installmentSchema.plugin(toJSON);
+ndcSchema.plugin(toJSON);
 
 /**
- * @typedef Land
+ * @typedef NDC
  */
-const Installment = mongoose.model('Installment', installmentSchema);
+const NDC = mongoose.model('Ndc', ndcSchema);
 
-module.exports = Installment;
+module.exports = NDC;

@@ -1,42 +1,45 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
 
-const transferSchema = mongoose.Schema(
+const changeOfMemberShipSchema = mongoose.Schema(
   {
     currentOwner: {
       type: Boolean,
-      default: false
+      default: false,
     },
     land: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Land',
     },
     cnic: {
-      type: String
+      type: String,
     },
     name: {
-      type: String
+      type: String,
     },
     sdw: {
-      type: String
+      type: String,
     },
     sonOf: {
-      type: String
+      type: String,
     },
     fatherHusbandName: {
-      type: String
+      type: String,
     },
     transferDate: {
-      type: String
+      type: String,
     },
     transferCharges: {
-      type: String
+      type: String,
     },
     address: {
-      type: String
+      type: String,
     },
     mobile: {
-      type: String
+      type: String,
+    },
+    attachments: {
+      type: Object,
     },
   },
   {
@@ -44,13 +47,12 @@ const transferSchema = mongoose.Schema(
   }
 );
 
-
 // add plugin that converts mongoose to json
-transferSchema.plugin(toJSON);
+changeOfMemberShipSchema.plugin(toJSON);
 
 /**
- * @typedef Transfer
+ * @typedef ChangeOfMemberShipSchema
  */
-const Transfer = mongoose.model('Transfer', transferSchema);
+const ChangeOfMemberShipSchema = mongoose.model('Com', changeOfMemberShipSchema);
 
-module.exports = Transfer;
+module.exports = ChangeOfMemberShipSchema;

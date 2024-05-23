@@ -1,2 +1,9 @@
 module.exports.Token = require('./token.model');
 module.exports.User = require('./user.model');
+module.exports.Booking = require('./booking.model');
+module.exports.ChangeOfMembership = require('./com.model');
+module.exports.Installment = require('./installment.model');
+module.exports.Land = require('./land.model');
+module.exports.Ndc = require('./ndc.model');
+module.exports.Member = require('./member.model');
+module.exports.Alert = require('./alert.model');
