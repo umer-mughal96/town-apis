@@ -7,7 +7,7 @@ const auth = require('../../middlewares/auth');
 const router = express.Router();
 
 router.get('/:id', auth(), landController.getById);
-router.post('/search/:value', auth(), landController.getByRegisNo);
+router.get('/search/:value', auth(), landController.getByRegisNo);
 // router.post('/login', validate(authValidation.login), authController.login);
 // router.post('/logout', validate(authValidation.logout), authController.logout);
 // router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);

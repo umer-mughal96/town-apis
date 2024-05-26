@@ -4,6 +4,11 @@ const createNdcDoc = (data) => {
   return Ndc.create(data);
 };
 
+const allNdcs = (query = {}, projection = null, options = {}) => {
+  console.log('🚀 ~ allNdcs ~ query, projection, options:', query, projection, options);
+  return Ndc.find(query, projection, options);
+};
+
 // const deleteOrder = query => {
 //   return Order.findOneAndDelete(query);
 // };
@@ -58,4 +63,4 @@ const createNdcDoc = (data) => {
 //     }
 //   ]);
 
-module.exports = { createNdcDoc };
+module.exports = { createNdcDoc, allNdcs };

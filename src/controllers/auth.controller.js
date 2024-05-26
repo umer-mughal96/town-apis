@@ -8,9 +8,19 @@ const register = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send({ user, tokens });
 });
 
+const me = catchAsync(async (req, res) => {
+  const { _id } = req.user;
+  const user = await userService.getUserById(_id);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  res.send(user);
+});
+
 const login = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await authService.loginUserWithEmailAndPassword(email, password);
+  const { username, password } = req.body;
+  const user = await authService.loginUserWithUsernameAndPassword(username, password);
+  console.log('🚀 ~ login ~ user:', user);
   const tokens = await tokenService.generateAuthTokens(user);
   res.send({ user, tokens });
 });
@@ -56,4 +66,5 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  me,
 };
