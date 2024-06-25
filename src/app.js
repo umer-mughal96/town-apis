@@ -13,6 +13,9 @@ const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const fs = require('fs');
 
 const app = express();
 
@@ -21,6 +24,7 @@ if (config.env !== 'test') {
   app.use(morgan.errorHandler);
 }
 
+app.use(bodyParser({ limit: '50mb' }));
 // set security HTTP headers
 app.use(helmet());
 
@@ -29,6 +33,24 @@ app.use(express.json());
 
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+// Ensure upload directories exist
+const ensureUploadDirsExist = () => {
+  const dirs = [
+    'public/uploads/buyerWitness',
+    'public/uploads/sellerWitness',
+    'public/uploads/members',
+    'public/uploads/photos',
+    'public/uploads/videos',
+  ];
+  dirs.forEach((dir) => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  });
+};
+ensureUploadDirsExist();
 
 // sanitize request data
 app.use(xss());

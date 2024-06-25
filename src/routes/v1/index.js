@@ -4,6 +4,7 @@ const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const landRoute = require('./land.route');
 const ndcRoute = require('./ndc.route');
+const membersRoute = require('./member.route');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -24,6 +25,10 @@ const defaultRoutes = [
   {
     path: '/ndc',
     route: ndcRoute,
+  },
+  {
+    path: '/members',
+    route: membersRoute,
   },
 ];
 

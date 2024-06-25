@@ -11,26 +11,17 @@ const ndcSchema = mongoose.Schema(
     applicantName: {
       type: String,
     },
-    phbNo: {
-      type: String,
-    },
-    membershipNo: {
+    applicantType: {
       type: String,
     },
     sonOf: {
       type: String,
     },
-    block: {
+    address: {
       type: String,
     },
-    phase: {
+    cnic: {
       type: String,
-    },
-    area: {
-      type: String,
-    },
-    appliedBy: {
-      type: Object,
     },
     phoneNo: {
       type: String,
@@ -39,13 +30,20 @@ const ndcSchema = mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    dueDate: {
+      type: Date,
+    },
     fileCheckList: {
       type: Object,
     },
     status: {
       type: String,
-      enum: ['pending', 'reject', 'success'],
+      enum: ['pending', 'processing', 'verified' , 'approved', 'reject'],
       default: 'pending',
+    },
+    fees: {
+      type: String,
+      enum: ['urgent', 'normal'],
     },
     remarks: {
       type: String,

@@ -5,8 +5,10 @@ const createNdcDoc = (data) => {
 };
 
 const allNdcs = (query = {}, projection = null, options = {}) => {
-  console.log('🚀 ~ allNdcs ~ query, projection, options:', query, projection, options);
   return Ndc.find(query, projection, options);
+};
+const findNdcById = (id) => {
+  return Ndc.findById(id);
 };
 
 // const deleteOrder = query => {
@@ -63,4 +65,4 @@ const allNdcs = (query = {}, projection = null, options = {}) => {
 //     }
 //   ]);
 
-module.exports = { createNdcDoc, allNdcs };
+module.exports = { createNdcDoc, allNdcs, findNdcById };

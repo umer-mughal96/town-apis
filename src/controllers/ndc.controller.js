@@ -1,13 +1,17 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService } = require('../services');
 const { getLandDoc } = require('../services/land.service');
-const { createNdcDoc, allNdcs } = require('../services/ndc.service');
+const { createNdcDoc, allNdcs, findNdcById } = require('../services/ndc.service');
+const { calculateDueDate } = require('../utils/date');
 
 const apply = async (req, res) => {
   try {
     const ndcFormData = req.body;
+    ndcFormData.dueDate = calculateDueDate();
     const ndc = await createNdcDoc(ndcFormData);
+    const land = await getLandDoc({ _id: ndcFormData.land });
+    land.ndcs.push(ndc._id);
+    await land.save();
     res.status(httpStatus.OK).json({ success: true, ndc });
   } catch (err) {
     console.log(err);
@@ -63,6 +67,17 @@ const getNdcs = async (req, res) => {
   }
 };
 
+const ndcById = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const ndc = await findNdcById(id).populate([
+    {
+      path: 'land',
+      populate: [{ path: 'histories alerts installments bookings' }],
+    },
+  ]);
+  res.status(httpStatus.OK).json({ success: true, ndc });
+});
+
 const updateNdc = async (req, res) => {
   try {
     const ndcFormData = req.body;
@@ -78,4 +93,5 @@ module.exports = {
   apply,
   updateNdc,
   getNdcs,
+  ndcById,
 };

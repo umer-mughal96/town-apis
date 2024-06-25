@@ -79,6 +79,12 @@ const landSchema = mongoose.Schema(
         ref: 'Alert',
       },
     ],
+    ndcs: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Ndc',
+      },
+    ],
     subTotal: {
       type: Object,
     },

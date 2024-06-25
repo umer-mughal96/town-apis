@@ -6,6 +6,7 @@ const memberSchema = mongoose.Schema(
     ndc: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Ndc',
+      required: true
     },
     members: [
       {
@@ -15,7 +16,7 @@ const memberSchema = mongoose.Schema(
         name: {
           type: String,
         },
-        fatherHusbandName: {
+        sonOf: {
           type: String,
         },
         address: {
@@ -24,29 +25,26 @@ const memberSchema = mongoose.Schema(
         mobile: {
           type: String,
         },
-        city: {
-          type: String,
-        },
-        thumbImpression: {
+        cnicUpload: {
           type: Object,
         },
-        picture: {
-          type: Object,
-        },
-        video: {
-          type: Object,
-        },
-        sign: {
-          type: Object,
-        },
-        witnessSign: {
-          type: Object,
-        },
-        thumbImpression: {
+        photoUpload: {
           type: Object,
         },
       },
     ],
+    buyerWitness: {
+      type: Object,
+    },
+    sellerWitness: {
+      type: Object,
+    },
+    photos: {
+      type: Array,
+    },
+    video: {
+      type: Object,
+    },
   },
   {
     timestamps: true,
