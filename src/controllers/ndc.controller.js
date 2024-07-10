@@ -74,7 +74,11 @@ const ndcById = catchAsync(async (req, res) => {
       path: 'land',
       populate: [{ path: 'histories alerts installments bookings' }],
     },
+    {
+      path: 'member',
+    },
   ]);
+  
   res.status(httpStatus.OK).json({ success: true, ndc });
 });
 

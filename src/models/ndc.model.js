@@ -8,6 +8,10 @@ const ndcSchema = mongoose.Schema(
       ref: 'Land',
       required: true,
     },
+    member: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Member',
+    },
     applicantName: {
       type: String,
     },
@@ -38,7 +42,7 @@ const ndcSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['pending', 'processing', 'verified' , 'approved', 'reject'],
+      enum: ['pending', 'processing', 'verified', 'approved', 'reject'],
       default: 'pending',
     },
     fees: {

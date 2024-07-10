@@ -22,7 +22,7 @@ const memberSchema = mongoose.Schema(
         address: {
           type: String,
         },
-        mobile: {
+        phoneNo: {
           type: String,
         },
         cnicUpload: {

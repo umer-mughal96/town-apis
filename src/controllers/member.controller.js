@@ -4,6 +4,7 @@ const { memberService } = require('../services');
 const { getLandDoc } = require('../services/land.service');
 const { findNdcById } = require('../services/ndc.service');
 const { calculateDueDate } = require('../utils/date');
+const { findMember, findMemberAndUpdate } = require('../services/member.service');
 
 const createNdcMembers = catchAsync(async (req, res) => {
   const files = req.files;
@@ -71,12 +72,19 @@ const createNdcMembers = catchAsync(async (req, res) => {
   console.log('🚀 ~ createNdcMembers ~ data:', data);
   const ndc = await findNdcById(data.ndc);
   ndc.status = 'processing';
-  await ndc.save();
   const doc = await memberService.createMembers(data);
-  console.log("🚀 ~ createNdcMembers ~ doc:", doc);
+  ndc.member = doc._id;
+  await ndc.save();
   res.status(httpStatus.CREATED).send({ success: true, members: doc });
+});
+
+const updateMembers = catchAsync(async (req, res) => {
+  const { id } = req.body;
+  const doc = await findMemberAndUpdate(id, req.body);
+  res.status(httpStatus.OK).send({ success: true, members: doc });
 });
 
 module.exports = {
   createNdcMembers,
+  updateMembers,
 };

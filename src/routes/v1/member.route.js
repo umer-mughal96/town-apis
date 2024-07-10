@@ -8,6 +8,7 @@ const { upload } = require('../../utils/multer');
 const router = express.Router();
 
 router.post('/', auth(), upload.any(), memberController.createNdcMembers);
+router.patch('/', auth(), upload.any(), memberController.updateMembers);
 // router.post('/login', validate(authValidation.login), authController.login);
 // router.post('/logout', validate(authValidation.logout), authController.logout);
 // router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
