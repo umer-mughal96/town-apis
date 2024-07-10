@@ -84,6 +84,8 @@ const updateMembers = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ success: true, members: doc });
 });
 
+
+
 module.exports = {
   createNdcMembers,
   updateMembers,

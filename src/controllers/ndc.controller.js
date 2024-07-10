@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { getLandDoc } = require('../services/land.service');
-const { createNdcDoc, allNdcs, findNdcById } = require('../services/ndc.service');
+const { createNdcDoc, allNdcs, findNdcById, updateNdcDoc } = require('../services/ndc.service');
 const { calculateDueDate } = require('../utils/date');
 
 const apply = async (req, res) => {
@@ -78,14 +78,15 @@ const ndcById = catchAsync(async (req, res) => {
       path: 'member',
     },
   ]);
-  
+
   res.status(httpStatus.OK).json({ success: true, ndc });
 });
 
 const updateNdc = async (req, res) => {
   try {
-    const ndcFormData = req.body;
-    const ndc = await createNdcDoc(ndcFormData);
+    const dataToUpdate = req.body;
+    const id = req.params.id;
+    const ndc = await updateNdcDoc({ _id: id }, dataToUpdate);
     res.status(httpStatus.OK).json({ success: true, ndc });
   } catch (err) {
     console.log(err);

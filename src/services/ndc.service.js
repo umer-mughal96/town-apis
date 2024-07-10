@@ -11,6 +11,10 @@ const findNdcById = (id) => {
   return Ndc.findById(id);
 };
 
+const updateNdcDoc = (filter, update) => {
+  return Ndc.findOneAndUpdate(filter, update, { new: true });
+};
+
 // const deleteOrder = query => {
 //   return Order.findOneAndDelete(query);
 // };
@@ -65,4 +69,4 @@ const findNdcById = (id) => {
 //     }
 //   ]);
 
-module.exports = { createNdcDoc, allNdcs, findNdcById };
+module.exports = { createNdcDoc, allNdcs, findNdcById, updateNdcDoc };

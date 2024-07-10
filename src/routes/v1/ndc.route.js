@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/apply', auth(), ndcController.apply);
 router.get('/all', auth(), ndcController.getNdcs);
 router.get('/:id', auth(), ndcController.ndcById);
+router.patch('/:id', auth(), ndcController.updateNdc);
 // router.post('/logout', validate(authValidation.logout), authController.logout);
 // router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
 // router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
